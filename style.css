@@ -188,6 +188,12 @@ h4 { font-size: 16px; }
   gap: 64px;
   align-items: center;
 }
+/* hero-content acts as a normal block on desktop — reset display:contents from mobile */
+.hero-content {
+  display: flex;
+  flex-direction: column;
+}
+.hero-text { display: contents; } /* transparent wrapper on desktop */
 .hero-badge {
   display: inline-flex;
   align-items: center;
@@ -830,25 +836,32 @@ h4 { font-size: 16px; }
   /* --- Hero --- */
   .hero { padding: 40px 0 52px; }
   .hero-inner {
-    grid-template-columns: 1fr;
-    gap: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
     text-align: center;
   }
-  .hero-content h1 { font-size: clamp(28px, 8vw, 40px); }
-  .hero-subtitle { font-size: 15px; margin-bottom: 28px; max-width: 100%; }
+  /* Use display:contents to "dissolve" hero-content so its children
+     (hero-text, hero-cta-block) become direct flex children of hero-inner,
+     allowing order-based reflow: text → image → cta */
+  .hero-content { display: contents; }
+  .hero-text { order: 1; text-align: center; }
   .hero-badge { justify-content: center; }
+  .hero-content h1 { font-size: clamp(28px, 8vw, 40px); }
+  .hero-subtitle { font-size: 15px; max-width: 100%; margin-bottom: 0; }
+  .hero-image { order: 2; justify-content: center; margin: 24px 0; }
+  .hero-cta-block { order: 3; }
+  .hero-image-wrapper { max-width: 320px; width: 100%; }
+  .hero-img-placeholder { min-height: 300px; }
+  .hero-doctor-photo { min-height: 300px; }
   .hero-actions {
     flex-direction: column;
     align-items: center;
     gap: 12px;
-    margin-bottom: 28px;
+    margin-bottom: 20px;
   }
   .hero-actions .btn { width: 100%; justify-content: center; }
   .hero-trust { justify-content: center; flex-wrap: wrap; gap: 12px; }
-  .hero-image { justify-content: center; }
-  .hero-image-wrapper { max-width: 320px; width: 100%; }
-  .hero-img-placeholder { min-height: 300px; }
-  .hero-doctor-photo { min-height: 300px; }
   .floating-card { display: none; }
   .card-1, .card-2 { display: none; }
 
@@ -899,8 +912,19 @@ h4 { font-size: 16px; }
   .booking-left { text-align: center; }
   .booking-left .clinic-info { text-align: left; }
   .booking-left .btn-whatsapp { width: 100% !important; justify-content: center !important; box-sizing: border-box; }
-  .form-row { grid-template-columns: 1fr; }
-  .booking-form-wrap { padding: 24px 16px; }
+  .form-row { grid-template-columns: 1fr; gap: 16px; }
+  .booking-form-wrap { padding: 20px 14px; border-radius: var(--radius); overflow: hidden; }
+  .booking-form { gap: 16px; }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-size: 16px; /* prevents iOS zoom on focus */
+    padding: 12px 12px;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  .form-consent { font-size: 12px; }
+  .booking { overflow: hidden; }
 
   /* --- Footer --- */
   .footer { padding: 48px 0 0; }
