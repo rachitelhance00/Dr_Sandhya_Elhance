@@ -182,14 +182,29 @@ if (bookingForm) {
 
     if (!isValid) return;
 
-    // Simulate form submission
     const submitBtn = bookingForm.querySelector('button[type="submit"]');
-    submitBtn.textContent = 'Submitting...';
+    submitBtn.textContent = 'Opening WhatsApp...';
     submitBtn.disabled = true;
 
     // Format date for display
     const dateObj = new Date(prefDate);
     const formattedDate = dateObj.toLocaleDateString('en-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    const message = document.getElementById('message').value.trim();
+
+    // Build WhatsApp message
+    const waText = [
+      'Hi Dr. Sandhya, I would like to book an appointment.',
+      '',
+      `Name: ${fullName}`,
+      `Phone: ${phone}`,
+      `Email: ${email}`,
+      `Concern: ${concern}`,
+      `Preferred Date: ${formattedDate}`,
+      `Preferred Time: ${prefTime}`,
+      message ? `Message: ${message}` : ''
+    ].filter(Boolean).join('\n');
+
+    const waUrl = 'https://wa.me/919041518645?text=' + encodeURIComponent(waText);
 
     setTimeout(() => {
       bookingForm.style.display = 'none';
@@ -197,13 +212,11 @@ if (bookingForm) {
       document.getElementById('successDetail').textContent =
         `${fullName} — ${formattedDate} at ${prefTime} for ${concern}`;
 
-      // Scroll to success message
       bookingSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-      // In a real implementation, you'd POST to a backend here:
-      // fetch('/api/booking', { method: 'POST', headers: {'Content-Type':'application/json'},
-      //   body: JSON.stringify({ fullName, email, phone, prefDate, prefTime, concern, message }) })
-    }, 1200);
+      // Open WhatsApp with pre-filled message
+      window.open(waUrl, '_blank');
+    }, 600);
   });
 }
 
@@ -234,27 +247,24 @@ function quickBooking() {
     return;
   }
 
-  // Pre-fill main form and scroll to it
-  const fullNameInput = document.getElementById('fullName');
-  const concernSelect = document.getElementById('concern');
-  const phoneInput = document.getElementById('phone');
+  // Build WhatsApp message
+  const waText = [
+    'Hi Dr. Sandhya, I would like to book an appointment.',
+    '',
+    `Name: ${name}`,
+    `Phone: ${phone}`,
+    `Concern: ${concern}`
+  ].join('\n');
 
-  if (fullNameInput) fullNameInput.value = name;
-  if (concernSelect) concernSelect.value = concern;
-  if (phoneInput) phoneInput.value = phone;
+  const waUrl = 'https://wa.me/919041518645?text=' + encodeURIComponent(waText);
 
   // Clear quick form
   document.getElementById('quickName').value = '';
   document.getElementById('quickConcern').value = '';
   document.getElementById('quickPhone').value = '';
 
-  // Scroll to booking section
-  const bookingSection = document.getElementById('booking');
-  if (bookingSection) {
-    const navHeight = navbar.offsetHeight;
-    const pos = bookingSection.getBoundingClientRect().top + window.scrollY - navHeight - 8;
-    window.scrollTo({ top: pos, behavior: 'smooth' });
-  }
+  // Open WhatsApp
+  window.open(waUrl, '_blank');
 }
 
 // ---- Newsletter subscribe ----
