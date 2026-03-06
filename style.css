@@ -685,6 +685,7 @@ h4 { font-size: 16px; }
   transition: background var(--transition);
 }
 .social-link:hover { background: var(--primary); }
+.maps-link:hover { background: #1a73e8; }
 .footer-col h4 { color: white; font-size: 14px; margin-bottom: 20px; }
 .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
 .footer-col ul li a, .footer-col ul li {
@@ -727,7 +728,30 @@ h4 { font-size: 16px; }
 .footer-legal a { font-size: 13px; color: rgba(255,255,255,0.4); transition: color var(--transition); }
 .footer-legal a:hover { color: white; }
 
-/* ---- Floating Book Button ---- */
+/* ---- Floating Buttons ---- */
+.floating-maps-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 192px;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #1a73e8;
+  color: white;
+  padding: 14px 20px;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 8px 32px rgba(26,115,232,0.35);
+  transition: all var(--transition);
+  opacity: 0;
+  transform: translateY(20px);
+  text-decoration: none;
+}
+.floating-maps-btn.visible { opacity: 1; transform: translateY(0); }
+.floating-maps-btn:hover { background: #1558b0; box-shadow: 0 12px 40px rgba(26,115,232,0.5); transform: translateY(-2px); }
+
 .floating-book-btn {
   position: fixed;
   bottom: 28px;

@@ -5,6 +5,7 @@
 // ---- Navbar scroll effect ----
 const navbar = document.getElementById('navbar');
 const floatingBtn = document.getElementById('floatingBtn');
+const floatingMapsBtn = document.querySelector('.floating-maps-btn');
 
 // Scroll progress bar
 const scrollBar = document.createElement('div');
@@ -20,9 +21,11 @@ window.addEventListener('scroll', () => {
   if (scrollTop > 80) {
     navbar.classList.add('scrolled');
     floatingBtn.classList.add('visible');
+    floatingMapsBtn.classList.add('visible');
   } else {
     navbar.classList.remove('scrolled');
     floatingBtn.classList.remove('visible');
+    floatingMapsBtn.classList.remove('visible');
   }
 }, { passive: true });
 
