@@ -1,0 +1,14 @@
+{
+    "name": "landing-page-dr-sadhya",
+    "version": "1.0.0",
+    "description": "Landing page for Dr. Sandhya Elhance",
+    "scripts": {
+        "dev": "npx serve ."
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "serve": "^14.2.4"
+    }
+}
