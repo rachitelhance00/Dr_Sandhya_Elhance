@@ -148,7 +148,14 @@ h4 { font-size: 16px; }
   transition: color var(--transition);
 }
 .nav-links a:hover { color: var(--primary); }
-.nav-cta { margin-left: 16px; }
+.nav-cta { margin-left: 0; }
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 16px;
+}
+.nav-practo { display: flex; align-items: center; }
 .hamburger {
   display: none;
   flex-direction: column;
@@ -269,8 +276,8 @@ h4 { font-size: 16px; }
 .floating-card strong { display: block; font-size: 14px; color: var(--dark); }
 .floating-card small { color: var(--text-muted); font-size: 12px; }
 .fc-icon { font-size: 20px; }
-.card-1 { top: 24px; right: -20px; }
-.card-2 { bottom: 40px; left: -20px; }
+.card-1 { top: 24px; right: -10px; }
+.card-2 { bottom: 40px; left: -10px; }
 
 /* ---- Trust Bar ---- */
 .trust-bar {
@@ -732,7 +739,7 @@ h4 { font-size: 16px; }
 .floating-maps-btn {
   position: fixed;
   bottom: 28px;
-  right: 160px;
+  right: 188px;
   z-index: 99;
   display: flex;
   align-items: center;
@@ -782,6 +789,7 @@ h4 { font-size: 16px; }
 
 @media (max-width: 768px) {
   .nav-links, .nav-cta { display: none; }
+  .nav-right { display: none; }
   .hamburger { display: flex; }
   .nav-links.open {
     display: flex;
@@ -799,8 +807,11 @@ h4 { font-size: 16px; }
   .nav-links.open + .nav-cta { display: none; }
 
   .hero { padding: 56px 0 64px; }
-  .hero-inner { grid-template-columns: 1fr; gap: 48px; }
-  .hero-image { display: none; }
+  .hero-inner { grid-template-columns: 1fr; gap: 36px; }
+  .hero-image { justify-content: center; }
+  .hero-image-wrapper { max-width: 280px; }
+  .hero-img-placeholder { min-height: 280px; }
+  .hero-doctor-photo { min-height: 280px; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
   .stat-item:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.1); }
@@ -816,7 +827,7 @@ h4 { font-size: 16px; }
   .virtual-inner { flex-direction: column; text-align: center; }
   .virtual-rating { text-align: center; }
   .virtual-form { flex-direction: column; }
-  .vf-input { min-width: unset; }
+  .vf-input { min-width: 0; width: 100%; }
   .floating-card { display: none; }
   .card-1, .card-2 { display: none; }
   .booking-form-wrap { padding: 28px 20px; }
